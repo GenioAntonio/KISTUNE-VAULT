@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitsune Vault | 16K Handcrafted Action Figure Atelier</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sumi: '#05070a',
+                        cardbg: '#0c1017',
+                        cardborder: '#161f2e',
+                        torii: '#dc2626',
+                        toriihover: '#ef4444',
+                        goldacc: '#f59e0b',
+                        cyberblue: '#06b6d4'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #05070a;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+        .font-cyber {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .hokusai-bg {
+            background: linear-gradient(180deg, rgba(5, 7, 10, 0.98) 0%, rgba(5, 7, 10, 1) 100%);
+            position: relative;
+        }
+        .glow-card:hover {
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+            border-color: rgba(6, 182, 212, 0.6);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05070a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #161f2e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body class="hokusai-bg min-h-screen flex flex-col justify-between">
+
+    <!-- Header & Nav -->
+    <header class="sticky top-0 z-50 bg-sumi/95 backdrop-blur-md border-b border-cardborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-torii to-goldacc flex items-center justify-center shadow-lg shadow-torii/20 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-masks-theater text-white text-xl"></i>
+                </div>
+                <div>
+                    <span class="font-cyber text-2xl font-extrabold tracking-wider bg-gradient-to-r from-white via-slate-200 to-goldacc bg-clip-text text-transparent">KITSUNE <span class="text-torii">VAULT</span></span>
+                    <span class="block text-[10px] tracking-widest text-slate-400 uppercase font-semibold">16K Artisan Atelier • Made in Italy</span>
+                </div>
+            </a>
+
+            <!-- Search Bar (Desktop) -->
+            <div class="hidden md:flex items-center flex-1 max-w-md mx-8">
+                <div class="relative w-full">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="searchInput" placeholder="Search figures, characters, scale..." class="w-full bg-cardborder/60 text-slate-200 text-sm rounded-xl pl-10 pr-4 py-2.5 border border-cardborder focus:outline-none focus:border-cyberblue transition-colors">
+                </div>
+            </div>
+
+            <!-- Cart & Actions -->
+            <div class="flex items-center space-x-4">
+                <a href="#atelier" class="hidden lg:inline-flex items-center space-x-2 text-xs font-semibold text-slate-300 hover:text-goldacc transition-colors px-3 py-2 rounded-lg bg-cardborder/40 border border-cardborder">
+                    <i class="fa-solid fa-microchip text-cyberblue"></i>
+                    <span>16K Hardware</span>
+                </a>
+                <button onclick="toggleCart()" class="relative bg-cardborder/80 hover:bg-cardborder text-white p-3 rounded-xl border border-cardborder transition-all flex items-center space-x-2">
+                    <i class="fa-solid fa-cart-shopping text-goldacc text-lg"></i>
+                    <span class="hidden sm:inline text-xs font-bold">Cart</span>
+                    <span id="cartBadge" class="absolute -top-2 -right-2 bg-torii text-white text-[11px] font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-md animate-pulse">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-16 lg:py-24 overflow-hidden border-b border-cardborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Hero Text -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-torii/10 border border-torii/30 px-4 py-1.5 rounded-full text-torii text-xs font-bold mb-6 tracking-wide uppercase shadow-lg">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>Artisan Atelier • 16K Printing & Painting</span>
+                    </div>
+                    <h1 class="font-cyber text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                        Signature Sculptures & Action Figures <br>
+                        <span class="bg-gradient-to-r from-cyberblue via-white to-goldacc bg-clip-text text-transparent">Dedicated to Legendary Anime Heroes</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-slate-300 mb-8 leading-relaxed">
+                        Bring to life the legendary protagonists from <strong class="text-white">Dragon Ball, Naruto, One Piece, and Demon Slayer</strong>. Choose between the <strong class="text-cyberblue">Raw 8K Resin Garage Kit</strong> printed with the Elegoo Saturn 4 Ultra 16K or the finished masterpiece <strong class="text-goldacc">hand-painted with meticulous care</strong> in our Italian studio.
+                    </p>
+
+                    <!-- Hardware Spec Pills -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 text-xs font-semibold text-slate-300">
+                        <div class="flex items-center space-x-2 bg-cardborder/90 border border-cardborder px-4 py-2.5 rounded-xl shadow-lg">
+                            <i class="fa-solid fa-cube text-cyberblue text-sm"></i>
+                            <span>Elegoo Saturn 4 Ultra 16K</span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-cardborder/90 border border-cardborder px-4 py-2.5 rounded-xl shadow-lg">
+                            <i class="fa-solid fa-shield-halved text-torii text-sm"></i>
+                            <span>8K ABS-Like 3.0 Resin</span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-cardborder/90 border border-cardborder px-4 py-2.5 rounded-xl shadow-lg">
+                            <i class="fa-solid fa-water text-goldacc text-sm"></i>
+                            <span>Mercury Plus V3.0 Wash & Cure</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Character Showcase -->
+                <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        <div class="bg-cardbg border border-cardborder rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform">
+                            <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=500&q=80" alt="Goku Ultra Instinct" class="w-full h-40 object-cover">
+                            <div class="p-3 bg-sumi">
+                                <span class="text-[10px] text-cyberblue uppercase font-bold block">Dragon Ball</span>
+                                <span class="text-xs font-bold text-white">Goku Ultra Instinct</span>
+                            </div>
+                        </div>
+                        <div class="bg-cardbg border border-cardborder rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform">
+                            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=500&q=80" alt="Roronoa Zoro" class="w-full h-48 object-cover">
+                            <div class="p-3 bg-sumi">
+                                <span class="text-[10px] text-goldacc uppercase font-bold block">One Piece</span>
+                                <span class="text-xs font-bold text-white">Roronoa Zoro Ashura</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-6">
+                        <div class="bg-cardbg border border-cardborder rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform">
+                            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=500&q=80" alt="Naruto Sage Mode" class="w-full h-48 object-cover">
+                            <div class="p-3 bg-sumi">
+                                <span class="text-[10px] text-torii uppercase font-bold block">Naruto</span>
+                                <span class="text-xs font-bold text-white">Naruto Sage Mode</span>
+                            </div>
+                        </div>
+                        <div class="bg-cardbg border border-cardborder rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform">
+                            <img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=500&q=80" alt="Tanjiro Kamado" class="w-full h-40 object-cover">
+                            <div class="p-3 bg-sumi">
+                                <span class="text-[10px] text-red-500 uppercase font-bold block">Demon Slayer</span>
+                                <span class="text-xs font-bold text-white">Tanjiro Hinokami Kagura</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter & Categories Bar -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-cardborder pb-6">
+            <!-- Category Filters -->
+            <div class="flex flex-wrap items-center gap-2" id="categoryFilters">
+                <button onclick="filterCategory('all')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-torii text-white shadow-lg shadow-torii/20" data-category="all">All Figures</button>
+                <button onclick="filterCategory('dragonball')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-cardborder/60 hover:bg-cardborder text-slate-300 border border-cardborder" data-category="dragonball">Dragon Ball</button>
+                <button onclick="filterCategory('naruto')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-cardborder/60 hover:bg-cardborder text-slate-300 border border-cardborder" data-category="naruto">Naruto</button>
+                <button onclick="filterCategory('onepiece')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-cardborder/60 hover:bg-cardborder text-slate-300 border border-cardborder" data-category="onepiece">One Piece</button>
+                <button onclick="filterCategory('demonslayer')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-cardborder/60 hover:bg-cardborder text-slate-300 border border-cardborder" data-category="demonslayer">Demon Slayer</button>
+            </div>
+
+            <!-- Global Finish Toggle Info -->
+            <div class="flex items-center space-x-3 text-xs text-slate-400 bg-cardborder/40 px-4 py-2 rounded-xl border border-cardborder">
+                <i class="fa-solid fa-circle-info text-goldacc"></i>
+                <span>Choose between <strong>Raw Print (Garage Kit)</strong> or <strong>Hand-Painted</strong></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Product Catalog -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 flex-grow w-full">
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Products injected dynamically via JS -->
+        </div>
+    </main>
+
+    <!-- Atelier & Hardware Section -->
+    <section id="atelier" class="bg-cardborder/30 border-y border-cardborder py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-xs font-bold uppercase tracking-widest text-cyberblue">Technology & Mastery</span>
+                <h2 class="font-cyber text-3xl font-extrabold text-white mt-2">Our 16K Atelier</h2>
+                <p class="text-slate-400 text-sm mt-3">Every single action figure is crafted in our Italian workshop following rigorous engineering and artistic standards.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Phase 1 -->
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl relative overflow-hidden group hover:border-cyberblue transition-all">
+                    <div class="absolute top-4 right-4 text-cyberblue/20 font-cyber text-3xl font-black">01</div>
+                    <div class="w-12 h-12 rounded-xl bg-cyberblue/10 flex items-center justify-center text-cyberblue mb-4">
+                        <i class="fa-solid fa-cube text-xl"></i>
+                    </div>
+                    <h3 class="font-cyber text-base font-bold text-white mb-2">Saturn 4 Ultra 16K Print</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Native 16K resolution with ultra-detailed 0.05mm layers to capture every single muscle fiber, armor plate, and hair strand.</p>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl relative overflow-hidden group hover:border-torii transition-all">
+                    <div class="absolute top-4 right-4 text-torii/20 font-cyber text-3xl font-black">02</div>
+                    <div class="w-12 h-12 rounded-xl bg-torii/10 flex items-center justify-center text-torii mb-4">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
+                    </div>
+                    <h3 class="font-cyber text-base font-bold text-white mb-2">8K ABS-Like 3.0 Resin</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">We exclusively use Elegoo 8K Space Grey resin with ABS-Like formulation: maximum structural flexibility and superior break resistance.</p>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl relative overflow-hidden group hover:border-goldacc transition-all">
+                    <div class="absolute top-4 right-4 text-goldacc/20 font-cyber text-3xl font-black">03</div>
+                    <div class="w-12 h-12 rounded-xl bg-goldacc/10 flex items-center justify-center text-goldacc mb-4">
+                        <i class="fa-solid fa-water text-xl"></i>
+                    </div>
+                    <h3 class="font-cyber text-base font-bold text-white mb-2">Mercury Plus V3.0 Wash</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Ultrasonic cleaning and 360° UV post-curing to eliminate any residue and ensure long-term chemical stability and durability.</p>
+                </div>
+
+                <!-- Phase 4 -->
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl relative overflow-hidden group hover:border-purple-500 transition-all">
+                    <div class="absolute top-4 right-4 text-purple-500/20 font-cyber text-3xl font-black">04</div>
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-4">
+                        <i class="fa-solid fa-paintbrush text-xl"></i>
+                    </div>
+                    <h3 class="font-cyber text-base font-bold text-white mb-2">Hand-Painting & Sealing</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Primer application, airbrush shading, and fine brush detailing finished with transparent matte or gloss anti-UV protective clear coat.</p>
+                </div>
+            </div>
+
+            <!-- Comparison Box -->
+            <div class="mt-12 bg-sumi border border-cardborder rounded-2xl p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div class="max-w-xl">
+                    <span class="text-xs font-bold uppercase tracking-widest text-goldacc">Two Purchase Options</span>
+                    <h3 class="font-cyber text-2xl font-bold text-white mt-1">Garage Kit (Raw) vs Painted Masterpiece</h3>
+                    <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                        If you love modeling, choose the <strong class="text-cyberblue">🛠️ Raw Print</strong> option: you will receive the Space Grey 8K resin piece fully washed and cured, ready for priming and painting by yourself. If you prefer the finished work of art, choose <strong class="text-goldacc">🖌️ Hand-Painted</strong> and receive a masterpiece ready for display.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                    <a href="#productGrid" class="bg-cyberblue hover:bg-cyberblue/95 text-sumi font-cyber text-xs font-extrabold uppercase px-6 py-3.5 rounded-xl text-center transition-all shadow-lg shadow-cyberblue/25">
+                        Explore Catalog
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Commissions Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="bg-gradient-to-br from-cardbg to-sumi border border-cardborder rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+            <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-torii/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative z-10">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-torii">Special Requests</span>
+                    <h2 class="font-cyber text-3xl font-extrabold text-white mt-2">Have a character or diorama in mind?</h2>
+                    <p class="text-slate-300 text-sm mt-4 leading-relaxed">
+                        We print and paint any custom 3D file or anime character not currently listed in our catalog on commission. Tell us your requirements, desired scale, and whether you prefer raw kit or hand-painted.
+                    </p>
+                    <ul class="mt-6 space-y-3 text-xs text-slate-300">
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-goldacc"></i>
+                            <span>Fast quote within 24 hours via email</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-goldacc"></i>
+                            <span>Optimized support placement with Saturn 4 Ultra 16K</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-check text-goldacc"></i>
+                            <span>Secure shipping with custom shock-absorbent packaging</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-sumi/80 border border-cardborder p-6 rounded-2xl">
+                    <form id="commissionForm" onsubmit="handleCommission(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1">Your Name</label>
+                            <input type="text" required class="w-full bg-cardborder/50 text-slate-200 text-sm rounded-xl px-4 py-2.5 border border-cardborder focus:outline-none focus:border-torii transition-colors" placeholder="e.g. Kenji Rossi">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-1">Character / Anime Series</label>
+                                <input type="text" required class="w-full bg-cardborder/50 text-slate-200 text-sm rounded-xl px-4 py-2.5 border border-cardborder focus:outline-none focus:border-torii transition-colors" placeholder="e.g. Nezuko Kamado">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 mb-1">Desired Finish</label>
+                                <select class="w-full bg-cardborder/50 text-slate-200 text-sm rounded-xl px-4 py-2.5 border border-cardborder focus:outline-none focus:border-torii transition-colors">
+                                    <option>🖌️ Hand-Painted by Atelier</option>
+                                    <option>🛠️ Raw Print (Garage Kit)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1">Notes & Details (Scale, pose, 3D file link if available)</label>
+                            <textarea rows="3" required class="w-full bg-cardborder/50 text-slate-200 text-sm rounded-xl px-4 py-2.5 border border-cardborder focus:outline-none focus:border-torii transition-colors" placeholder="I would like a 1/6 scale statue with translucent energy effect..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-torii hover:bg-toriihover text-white font-cyber text-xs font-extrabold uppercase py-3.5 rounded-xl transition-all shadow-lg shadow-torii/20">
+                            Submit Quote Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-sumi border-t border-cardborder pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-cardborder">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-torii to-goldacc flex items-center justify-center">
+                        <i class="fa-solid fa-masks-theater text-white"></i>
+                    </div>
+                    <span class="font-cyber text-lg font-bold text-white">KITSUNE <span class="text-torii">VAULT</span></span>
+                </div>
+                <div class="flex flex-wrap items-center gap-6 text-xs text-slate-400">
+                    <span><i class="fa-solid fa-location-dot text-torii mr-1.5"></i> Rome, Italy</span>
+                    <span><i class="fa-solid fa-truck text-cyberblue mr-1.5"></i> Free Shipping over €80</span>
+                    <span><i class="fa-solid fa-shield text-goldacc mr-1.5"></i>
