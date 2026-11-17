@@ -342,6 +342,195 @@
                     <span class="font-cyber text-lg font-bold text-white">KITSUNE <span class="text-torii">VAULT</span></span>
                 </div>
                 <div class="flex flex-wrap items-center gap-6 text-xs text-slate-400">
-                    <span><i class="fa-solid fa-location-dot text-torii mr-1.5"></i> Rome, Italy</span>
-                    <span><i class="fa-solid fa-truck text-cyberblue mr-1.5"></i> Free Shipping over €80</span>
-                    <span><i class="fa-solid fa-shield text-goldacc mr-1.5"></i>
+                   <span><i class="fa-solid fa-shield text-goldacc mr-1.5"></i> Secure 16K Packaging</span>
+                </div>
+            </div>
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+                <p>&copy; 2026 Kitsune Vault. All rights reserved. Handcrafted with passion in Italy.</p>
+                <div class="flex space-x-4 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-slate-300 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-300 transition-colors">Terms of Service</a>
+                    <a href="#" class="hover:text-slate-300 transition-colors">Contact Atelier</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer Modal -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div id="cartOverlay" class="absolute inset-0 bg-sumi/80 backdrop-blur-sm transition-opacity" onclick="toggleCart()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-cardbg border-l border-cardborder shadow-2xl flex flex-col">
+                <div class="p-6 border-b border-cardborder flex items-center justify-between">
+                    <h3 class="font-cyber font-bold text-lg text-white flex items-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-goldacc"></i> Your Cart (<span id="drawerCount">0</span>)
+                    </h3>
+                    <button onclick="toggleCart()" class="text-slate-400 hover:text-white text-xl p-2 cursor-pointer">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <p class="text-slate-500 text-center py-12">Your cart is currently empty.</p>
+                </div>
+                <div class="p-6 border-t border-cardborder bg-sumi">
+                    <div class="flex justify-between items-center mb-4 text-white font-bold">
+                        <span>Total:</span>
+                        <span id="cartTotal" class="text-goldacc text-lg">€ 0.00</span>
+                    </div>
+                    <button onclick="alert('Checkout simulato completato con successo!')" class="w-full bg-torii hover:bg-toriihover text-white font-cyber text-xs font-extrabold uppercase py-3.5 rounded-xl transition-all shadow-lg shadow-torii/20 cursor-pointer">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript principale per prodotti e carrello -->
+    <script>
+        // Database dei prodotti
+        const products = [
+            { id: 1, name: "Goku Ultra Instinct", category: "dragonball", priceRaw: 149.00, pricePainted: 289.00, img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=500&q=80" },
+            { id: 2, name: "Roronoa Zoro Ashura", category: "onepiece", priceRaw: 169.00, pricePainted: 329.00, img: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=500&q=80" },
+            { id: 3, name: "Naruto Sage Mode", category: "naruto", priceRaw: 159.00, pricePainted: 299.00, img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=500&q=80" },
+            { id: 4, name: "Tanjiro Hinokami Kagura", category: "demonslayer", priceRaw: 139.00, pricePainted: 269.00, img: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=500&q=80" }
+        ];
+
+        let cart = [];
+
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            
+            items.forEach(p => {
+                grid.innerHTML += `
+                    <div class="bg-cardbg border border-cardborder rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between group glow-card transition-all">
+                        <div class="relative overflow-hidden h-56">
+                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-sumi/90 backdrop-blur-md text-goldacc text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-cardborder">${p.category}</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="font-cyber text-base font-bold text-white mb-2">${p.name}</h3>
+                                <div class="space-y-1 mb-4 text-xs text-slate-300">
+                                    <div class="flex justify-between items-center bg-sumi/60 px-3 py-1.5 rounded-lg border border-cardborder">
+                                        <span>🛠️ Raw 8K Kit:</span>
+                                        <strong class="text-cyberblue">€ ${p.priceRaw.toFixed(2)}</strong>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-sumi/60 px-3 py-1.5 rounded-lg border border-cardborder">
+                                        <span>🖌️ Hand-Painted:</span>
+                                        <strong class="text-goldacc">€ ${p.pricePainted.toFixed(2)}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="addToCart(${p.id}, 'raw')" class="bg-cardborder hover:bg-cyberblue hover:text-sumi text-slate-200 text-xs font-bold py-2.5 rounded-xl transition cursor-pointer">
+                                    Add Kit
+                                </button>
+                                <button onclick="addToCart(${p.id}, 'painted')" class="bg-torii hover:bg-toriihover text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md shadow-torii/20 cursor-pointer">
+                                    Add Painted
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterCategory(cat) {
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if(btn.dataset.category === cat) {
+                    btn.className = "cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-torii text-white shadow-lg shadow-torii/20";
+                } else {
+                    btn.className = "cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-cardborder/60 hover:bg-cardborder text-slate-300 border border-cardborder";
+                }
+            });
+
+            if(cat === 'all') {
+                renderProducts(products);
+            } else {
+                renderProducts(products.filter(p => p.category === cat));
+            }
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cartDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function addToCart(id, type) {
+            const product = products.find(p => p.id === id);
+            const price = type === 'raw' ? product.priceRaw : product.pricePainted;
+            const finishName = type === 'raw' ? 'Raw 8K Kit' : 'Hand-Painted Masterpiece';
+            
+            cart.push({
+                name: `${product.name} (${finishName})`,
+                price: price
+            });
+            
+            updateCartUI();
+            toggleCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cartBadge');
+            const drawerCount = document.getElementById('drawerCount');
+            const container = document.getElementById('cartItemsContainer');
+            const totalEl = document.getElementById('cartTotal');
+
+            badge.textContent = cart.length;
+            drawerCount.textContent = cart.length;
+
+            if(cart.length === 0) {
+                container.innerHTML = '<p class="text-slate-500 text-center py-12">Your cart is currently empty.</p>';
+                totalEl.textContent = '€ 0.00';
+                return;
+            }
+
+            let total = 0;
+            container.innerHTML = '';
+            cart.forEach((item, idx) => {
+                total += item.price;
+                container.innerHTML += `
+                    <div class="flex justify-between items-center bg-sumi p-4 rounded-xl border border-cardborder">
+                        <div>
+                            <h4 class="text-white font-bold text-xs">${item.name}</h4>
+                            <span class="text-goldacc text-xs">€ ${item.price.toFixed(2)}</span>
+                        </div>
+                        <button onclick="removeFromCart(${idx})" class="text-slate-500 hover:text-torii text-sm cursor-pointer">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            totalEl.textContent = `€ ${total.toFixed(2)}`;
+        }
+
+        // Inizializza i prodotti all'avvio
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
+            
+            // Barra di ricerca dinamica
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const term = e.target.value.toLowerCase();
+                    const filtered = products.filter(p => p.name.toLowerCase().includes(term) || p.category.toLowerCase().includes(term));
+                    renderProducts(filtered);
+                });
+            }
+        });
+
+        function handleCommission(e) {
+            e.preventDefault();
+            alert('Richiesta di preventivo inviata con successo! Ti risponderemo via email entro 24 ore.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
